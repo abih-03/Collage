@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #89a5d8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        form {
+            background-color: #edfffe;
+            padding: 25px;
+            border-radius: 30px;
+            border: 2PX solid floralwhite;
+            width: 400px;
+        }
+        label {
+            align-items: auto;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            background: none;
+        }
+        textarea{
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            background: none;
+        }
+
+        button{
+            margin: 10px;
+            width: 70px;
+            padding: 5px;
+            background: linear-gradient(to right, #89a5d8, #e2ffe2, #b5cecd);
+        }
+
+        button:hover{
+            background: linear-gradient(to left, #89a5d8, #e2ffe2, #b5cecd);
+        }
+        #output {
+            margin-top: 20px;
+            background: #e2ffe2;
+            padding: 15px;
+            border-radius: 10px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>User Registration Form</h2>
+    <form id="userForm">
+        <label><b>Name:</b>
+            <input type="text" id="name" required>
+        </label>
+
+        <label><b>Address:</b>
+            <textarea id="address" rows="3" required></textarea>
+        </label>
+
+        <label><b>Gender:</b>
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+        </label>
+
+        <label><b>Qualification:</b>
+            <select id="qualification">
+                <option value="">Select Qualification</option>
+                <option value="10th">10th</option>
+                <option value="12th">12th</option>
+                <option value="Graduate">Graduate</option>
+                <option value="Post Graduate">Post Graduate</option>
+            </select>
+        </label>
+
+        <label><b>Email ID:</b>
+            <input type="email" id="email" required>
+        </label>
+
+        <label><B>Hobbies:</B>
+            <input type="checkbox" value="Reading" class="hobby"> Reading
+            <input type="checkbox" value="Traveling" class="hobby"> Traveling
+            <input type="checkbox" value="Gaming" class="hobby"> Gaming
+        </label>
+
+        <div>
+            <button class="rimpal-btn" type="button" onclick="checkPalindrome()">Submit</button>
+            <button class="rimpal-btn" type="button" onclick="checkPalindrome()">Reset</button>
+        </div>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function handleSubmit() {
+            const name = document.getElementById("name").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const qualification = document.getElementById("qualification").value;
+
+            const genderEl = document.querySelector('input[name="gender"]:checked');
+            const gender = genderEl ? genderEl.value : "";
+
+            const hobbies = Array.from(document.querySelectorAll(".hobby:checked")).map(cb => cb.value);
+
+            // Basic Validation
+            if (!name || !address || !email || !gender || !qualification) {
+                alert("Please fill all required fields!");
+                return;
+            }
+
+            let output = `
+                <strong>Accepted Details:</strong><br>
+                Name: ${name}<br>
+                Address: ${address}<br>
+                Gender: ${gender}<br>
+                Qualification: ${qualification}<br>
+                Email: ${email}<br>
+                Hobbies: ${hobbies.length ? hobbies.join(", ") : "None"}
+            `;
+            document.getElementById("output").innerHTML = output;
+        }
+    </script>
+
+</body>
+</html>

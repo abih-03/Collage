@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign In / Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#7b9c92, #dfe4dc, #403425);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 60px auto;
+      background: linear-gradient(#dfe0e2, #b8bcc3, #787a84);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 50px;
+      border: 1px solid #aaa;
+    }
+
+    .gender-group {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .gender-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .gender-group input {
+      margin-right: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #1b4242, #4fbdba, #cdeed6);
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #a7ffeb, #14655b, #002b36);
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .switch a {
+      color: #398a74;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="form-box">
+    <h2 id="form-title">Sign Up</h2>
+    <form onsubmit="return validateForm()">
+      <label>Email:</label>
+      <input type="email" id="email" placeholder="Email" required>
+
+      <label>Password:</label>
+      <input type="password" id="password" placeholder="Password" required>
+
+      <div id="extra-fields">
+        <label>Birth Date:</label>
+        <input type="date" required>
+
+        <label>Gender:</label>
+        <div class="gender-group">
+          <label><input type="radio" name="gender" value="Male"> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+          <label><input type="radio" name="gender" value="Other"> Other</label>
+        </div>
+
+        <label>City:</label>
+        <input type="text" placeholder="City" required>
+      </div>
+
+      <button type="submit">Submit</button>
+
+      <div class="switch">
+        <span id="toggle-text">Already have an account?</span>
+        <a href="#" onclick="toggleForm()">Sign In</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    let isSignUp = true;
+
+    function toggleForm() {
+      isSignUp = !isSignUp;
+      document.getElementById("form-title").innerText = isSignUp ? "Sign Up" : "Sign In";
+      document.getElementById("extra-fields").style.display = isSignUp ? "block" : "none";
+      document.getElementById("toggle-text").innerText = isSignUp ? "Already have an account?" : "Don't have an account?";
+    }
+
+    function validateForm() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email === "" || password === "") {
+        alert("Please fill out all fields.");
+        return false;
+      }
+
+      if (isSignUp) {
+        const gender = document.querySelector('input[name="gender"]:checked');
+        if (!gender) {
+          alert("Please select your gender.");
+          return false;
+        }
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>

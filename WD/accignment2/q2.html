@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Analysis</title>
+    <style>
+        body {
+            background-color: #7d9cb7;
+            font-family: Arial;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        h2{
+            text-align: center;
+            text-transform: initial;
+            color: #ffe8e8;   
+        }
+        textarea{
+            border: 2px solid #3A3E4D;
+            margin: 5px;
+            padding: 10px;
+            width: 300px;
+            background:linear-gradient(to right, #b1cbbb, #b2b2b2);
+        }
+        input:focus{
+            border-color: aqua;
+            border: 5px solid;
+        }
+        button{
+            margin: 5px;
+            padding: 10px;
+            width: 200px;
+            background:linear-gradient(to right, #BF998F, #3A3E4D);
+        }
+        button:hover{
+            background: linear-gradient(to left, #BF998F, #3A3E4D);
+        }
+        .result {
+            margin-top: 20px;
+            background: linear-gradient(to right, #E5D0CF, #577D73);
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            border: 2px solid #3A3E4D;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>String Analyzer</h2>
+    <textarea id="inputString" rows="4" placeholder="Enter your string here..."></textarea>
+    <button onclick="analyzeString()">Analyze</button>
+
+    <div class="result" id="output"></div>
+
+    <script>
+        function analyzeString() {
+            const str = document.getElementById("inputString").value;
+
+            const totalChars = str.length;
+            const words = str.trim().split(/\s+/).filter(Boolean).length;
+            const vowels = (str.match(/[aeiouAEIOU]/g) || []).length;
+            const spaces = (str.match(/ /g) || []).length;
+            const digits = (str.match(/\d/g) || []).length;
+            const specialChars = (str.match(/[^a-zA-Z0-9\s]/g) || []).length;
+
+            document.getElementById("output").innerHTML = `
+                <strong>Analysis Result:</strong><br>
+                Total Characters: ${totalChars} <br>
+                Total Words: ${words} <br>
+                Vowels: ${vowels} <br>
+                Spaces: ${spaces} <br>
+                Digits: ${digits} <br>
+                Special Characters: ${specialChars}
+            `;
+        }
+    </script>
+
+</body>
+</html>
